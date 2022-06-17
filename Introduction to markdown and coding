@@ -1,0 +1,45 @@
+Header
+header
+text \
+
+a
+b
+c
+TITLE
+
+2+2
+4
+2+2
+4
+3+3
+6
+QUOTE STUFF = "Fantastic"
+  File "<ipython-input-7-f0ee9db58e34>", line 1
+    QUOTE STUFF = "Fantastic"
+              ^
+SyntaxError: invalid syntax
+var = "fantastic"
+var
+'fantastic'
+ 
+my_list = [1,2,3,4,5]
+my_list
+[1, 2, 3, 4, 5]
+my_list[1]
+---------------------------------------------------------------------------
+IndexError                                Traceback (most recent call last)
+<ipython-input-17-1b4386cd6413> in <module>
+----> 1 my_list[1]
+
+IndexError: list index out of range
+my_list = "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"
+my_list
+('lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche')
+my_list [2]
+'mercredi'
+Python
+This is absolutely great!
+
+me = {'name:linda', 'age:39', 'job:student'}
+me
+{'age:39', 'job:student', 'name:linda'}
