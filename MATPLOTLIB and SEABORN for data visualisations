@@ -1,0 +1,118 @@
+import matplotlib.pyplot as plt
+plt.rcParams["figure.figsize"] = [5, 4]
+plt.rcParams["figure.dpi"] = 120
+plt.rcParams["font.size"] = 8
+demo_data_2019.loc[:, 'income_per_person_1000'] = demo_data_2019.income_per_person/1000
+plt.scatter(x = 'income_per_person_1000',
+           y = 'life_expectancy',
+           data = demo_data_2019);
+
+plt.xlabel('Income per person($1000, ppp)')
+plt.ylabel ('Life expectancy')
+plt.title ('Scatterplot of Income per person vs life expectancy');
+plt.yticks([50,60,70,80]);
+
+import seaborn as sns
+sns.set_style('whitegrid')
+sns.scatterplot(x='income_per_person_1000',
+               y='life_expectancy',
+               data=demo_data_2019,
+               hue='fertility_rate',
+               palette='mako_r');
+
+plt.xlabel('Income per person($1000, ppp)')
+plt.ylabel ('Life expectancy')
+plt.title ('Scatterplot of Income per person vs life expectancy');
+plt.yticks([50,60,70,80]);
+
+import numpy as np
+demo_data_2019.loc[:,'fertility_above_5']=np.where(demo_data_2019.fertility_rate>5,'yes','no')
+demo_data_subset=demo_data.loc[demo_data.country.isin(['Norway','Switzerland','South Sudan', 'Chad'])].copy()
+demo_data_subset
+country	year	fertility_rate	income_per_person	life_expectancy
+3840	Chad	1900	6.06	617	32.7
+3841	Chad	1901	6.06	620	32.8
+3842	Chad	1902	6.06	623	32.8
+3843	Chad	1903	6.06	626	32.9
+3844	Chad	1904	6.06	629	32.9
+...	...	...	...	...	...
+19195	Switzerland	2015	1.54	57300	83.5
+19196	Switzerland	2016	1.55	57600	83.8
+19197	Switzerland	2017	1.55	58000	84.0
+19198	Switzerland	2018	1.55	59000	84.1
+19199	Switzerland	2019	1.56	59000	84.3
+480 rows × 5 columns
+
+sns.lineplot(x='year',
+             y='fertility_rate',
+            data=demo_data_subset,
+            hue='country')
+<AxesSubplot:xlabel='year', ylabel='fertility_rate'>
+
+sns.lineplot(x='year',
+            y='income_per_person',
+            data=demo_data_subset,
+            hue='country')
+<AxesSubplot:xlabel='year', ylabel='income_per_person'>
+
+demo_data.loc[[demo_data.life_expectancy.idxmax(), demo_data.life_expectancy.idxmin()]]
+country	year	fertility_rate	income_per_person	life_expectancy
+17279	Singapore	2019	1.27	90100	85.1
+16338	Samoa	1918	6.98	2050	1.1
+life_expect = demo_data.loc[demo_data.country.isin(['Singapore','Samoa'])].copy()
+life_expect
+country	year	fertility_rate	income_per_person	life_expectancy
+16320	Samoa	1900	6.98	1840	27.1
+16321	Samoa	1901	6.98	1850	27.1
+16322	Samoa	1902	6.98	1850	27.2
+16323	Samoa	1903	6.98	1860	27.2
+16324	Samoa	1904	6.98	1870	27.3
+...	...	...	...	...	...
+17275	Singapore	2015	1.24	83300	84.4
+17276	Singapore	2016	1.25	84700	84.7
+17277	Singapore	2017	1.25	87800	84.8
+17278	Singapore	2018	1.26	90100	85.0
+17279	Singapore	2019	1.27	90100	85.1
+240 rows × 5 columns
+
+import seaborn as sns
+sns.barplot(x = 'country',
+           y = 'income_per_person',
+           data = top_earners.head(5))
+
+plt.xlabel('')
+plt.ylabel('Income per person')
+plt.title('Countries with the highest income in 2019');
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-24-b3ffc13b6812> in <module>
+      1 sns.barplot(x = 'country',
+      2            y = 'income_per_person',
+----> 3            data = top_earners.head(5))
+      4 
+      5 plt.xlabel('')
+
+NameError: name 'top_earners' is not defined
+sns.lineplot(x='year', y='life_expectancy', data=life_expect, hue='country')
+<AxesSubplot:xlabel='year', ylabel='life_expectancy'>
+
+top_earners=demo_data_2019.sort_values('income_per_person', ascending=False).copy()
+top_earners.head (5)
+country	year	fertility_rate	income_per_person	life_expectancy	income_per_person_1000	fertility_above_5
+15959	Qatar	2019	1.85	113000	80.5	113.0	no
+11519	Luxembourg	2019	1.61	94300	82.0	94.3	no
+17279	Singapore	2019	1.27	90100	85.1	90.1	no
+9359	Ireland	2019	1.98	72400	82.3	72.4	no
+2879	Brunei	2019	1.84	72400	75.6	72.4	no
+last_20=demo_data.loc[demo_data.year>2000].copy()
+sns.barplot(x='income_per_person',
+           y='year',
+           data=last_20,
+           ci=False,
+           orient='h').invert_yaxis()
+    
+
+plt.xlabel('')
+plt.ylabel('Income per person')
+plt.title('Average income per person by year from 2000 to 2019')
+Text(0.5, 1.0, 'Average income per person by year from 2000 to 2019')
